@@ -58,3 +58,9 @@ Command: grep -Ec '^[0-9-]+ 0[0-2]:[0-5][0-9]:[0-5][0-9] ' firewall.log
 Result: 13138
 
 Explanation: ^[0-9-]+ anchors to the start of the line and consumes the date field. Then 0[0-2] uses a character class range to match exactly hours 00, 01 or 02. :[0-5][0-9] validates minutes and seconds in valid range, ensuring the full time is within the window 00:00:00 to 02:59:59.
+
+## Bonus
+
+Regex: ^[^ ]{1,15}$
+
+Explanation: ^ and $ anchor the match to the entire line. [^ ] is a negated character class that forbids spaces, and {1,15} requires between 1 and 15 characters. This matches webhost001, webhost002 and proxy_07, but not "that server is broken" because it contains spaces and exceeds 15 characters.
