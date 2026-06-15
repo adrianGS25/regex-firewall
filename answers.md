@@ -43,3 +43,10 @@ Result:
 
 Explanation: Three capture groups () capture: \1 = date ([0-9-]+), \2 = action ([^ ]+) skipping the time field, and \3 = protocol ([^ ]+). The substitution s/pattern/\1 \2 \3/ rebuilds the line using only those three fields.
 
+## Task 6
+
+Command: grep -Ec ' ACCEPT TCP .* 80 [0-9]+$' firewall.log
+
+Result: 93
+
+Explanation: ACCEPT TCP matches the action and protocol fields literally. .* consumes all intermediate fields (IPs and source port). 80 followed by a space and [0-9]+$ anchors the value 80 to the dst-port field, which is the second-to-last field just before the size at the end of the line.
