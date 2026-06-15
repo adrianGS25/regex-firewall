@@ -29,3 +29,17 @@ Command: grep -Ec ' [0-9]{7}$' firewall.log
 Result: 2343
 
 Explanation: [0-9]{7} usa el cuantificador {n} para exigir exactamente 7 dígitos consecutivos. El ancla $ al final de línea garantiza que el campo size termine justo ahí sin dígitos adicionales, por lo que solo coinciden valores >= 1,000,000.
+
+## Task 5
+
+Command: grep -E '^[^#]' firewall.log | sed -E 's/^([0-9-]+) [^ ]+ ([^ ]+) ([^ ]+) .*/\1 \2 \3/' | head -5
+
+Result:
+2018-05-25 FORWARD TCP
+2018-02-22 FORWARD UDP
+2018-03-20 REJECT UDP
+2018-11-08 REJECT TCP
+2018-07-24 REJECT TCP
+
+Explanation: Three capture groups () capture: \1 = date ([0-9-]+), \2 = action ([^ ]+) skipping the time field, and \3 = protocol ([^ ]+). The substitution s/pattern/\1 \2 \3/ rebuilds the line using only those three fields.
+
