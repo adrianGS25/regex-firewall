@@ -21,3 +21,11 @@ Command: grep -Ec ' 11\.' firewall.log
 Result: 33217
 
 Explanation: El espacio antes de 11 asegura que estamos al inicio del campo src-ip. \. escapa el punto para que sea tratado literalmente como un punto real que separa octetos, y no como metacarácter que coincide con cualquier carácter.
+
+## Task 4
+
+Command: grep -Ec ' [0-9]{7}$' firewall.log
+
+Result: 2343
+
+Explanation: [0-9]{7} usa el cuantificador {n} para exigir exactamente 7 dígitos consecutivos. El ancla $ al final de línea garantiza que el campo size termine justo ahí sin dígitos adicionales, por lo que solo coinciden valores >= 1,000,000.
