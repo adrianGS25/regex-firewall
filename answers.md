@@ -50,3 +50,11 @@ Command: grep -Ec ' ACCEPT TCP .* 80 [0-9]+$' firewall.log
 Result: 93
 
 Explanation: ACCEPT TCP matches the action and protocol fields literally. .* consumes all intermediate fields (IPs and source port). 80 followed by a space and [0-9]+$ anchors the value 80 to the dst-port field, which is the second-to-last field just before the size at the end of the line.
+
+## Task 7
+
+Command: grep -Ec '^[0-9-]+ 0[0-2]:[0-5][0-9]:[0-5][0-9] ' firewall.log
+
+Result: 13138
+
+Explanation: ^[0-9-]+ anchors to the start of the line and consumes the date field. Then 0[0-2] uses a character class range to match exactly hours 00, 01 or 02. :[0-5][0-9] validates minutes and seconds in valid range, ensuring the full time is within the window 00:00:00 to 02:59:59.
